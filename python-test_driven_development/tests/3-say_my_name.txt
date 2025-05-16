@@ -30,3 +30,8 @@ My name is
 # Test with special characters
 >>> say_my_name("Jöhn", "Smîth")
 My name is Jöhn Smîth
+
+# Test with none values
+>>> say_my_name(None)
+Traceback (most recent call last):
+TypeError: first_name must be a string
