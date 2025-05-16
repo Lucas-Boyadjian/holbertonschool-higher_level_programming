@@ -1,49 +1,54 @@
 # Tests pour la fonction matrix_divided
 >>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
 # Test de base avec une matrice simple
 >>> matrix = [[1, 2, 3], [4, 5, 6]]
 >>> matrix_divided(matrix, 3)
 [[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+
 # Vérifier que la matrice originale n'est pas modifiée
 >>> matrix
 [[1, 2, 3], [4, 5, 6]]
+
 # Test avec différents types de nombres
 >>> matrix = [[1.1, 2.2, 3.3], [4.4, 5.5, 6.6]]
 >>> matrix_divided(matrix, 2)
 [[0.55, 1.1, 1.65], [2.2, 2.75, 3.3]]
+
 # Test avec division par un float
 >>> matrix_divided([[10, 20], [30, 40]], 2.5)
 [[4.0, 8.0], [12.0, 16.0]]
+
 # Test d'erreur : diviseur égal à zéro
 >>> matrix_divided([[1, 2], [3, 4]], 0)
 Traceback (most recent call last):
-...
 ZeroDivisionError: division by zero
+
 # Test d'erreur : diviseur n'est pas un nombre
 >>> matrix_divided([[1, 2], [3, 4]], "diviseur")
 Traceback (most recent call last):
-...
 TypeError: div must be a number
+
 # Test d'erreur : matrice n'est pas une liste de listes
 >>> matrix_divided("pas une matrice", 2)
 Traceback (most recent call last):
-...
 TypeError: matrix must be a matrix (list of lists) of integers/floats
+
 # Test d'erreur : matrice contient des éléments non numériques
 >>> matrix_divided([[1, "deux"], [3, 4]], 2)
 Traceback (most recent call last):
-...
 TypeError: matrix must be a matrix (list of lists) of integers/floats
+
 # Test d'erreur : lignes de tailles différentes
 >>> matrix_divided([[1, 2, 3], [4, 5]], 2)
 Traceback (most recent call last):
-...
 TypeError: Each row of the matrix must have the same size
+
 # Test avec une matrice vide
 >>> matrix_divided([], 2)
 Traceback (most recent call last):
-...
 TypeError: matrix must be a matrix (list of lists) of integers/floats
+
 # Test avec des lignes vides mais de même taille
 >>> matrix_divided([[], []], 2)
 [[], []]

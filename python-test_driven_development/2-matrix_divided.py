@@ -23,42 +23,44 @@ def matrix_divided(matrix, div):
         TypeError: If div is not a number
         ZeroDivisionError: If div is 0
     """
-    if not isinstance(matrix, list):
-        raise TypeError("matrix must be a matrix (list of lists) "
-                        "of integers/floats")
-
-    if len(matrix) == 0:
-        raise TypeError("matrix must be a matrix (list of lists) "
-                        "of integers/floats")
-
-    for row in matrix:
-        if not isinstance(row, list):
-            raise TypeError("matrix must be a matrix (list of lists) "
-                            "of integers/floats")
-
-        if len(row) == 0:
-            raise TypeError("matrix must be a matrix (list of lists) "
-                            "of integers/floats")
-
-        for element in row:
-            if not isinstance(element, (int, float)):
-                raise TypeError("matrix must be a matrix (list of lists) "
-                                "of integers/floats")
-
-    row_size = len(matrix[0])
-    for row in matrix:
-        if len(row) != row_size:
-            raise TypeError("Each row of the matrix must have the same size")
-
+    error_msg = "matrix must be a matrix (list of lists) of integers/floats"
+    
+    # Check if div is a number
     if not isinstance(div, (int, float)):
         raise TypeError("div must be a number")
-
+    
+    # Check if div is zero
     if div == 0:
         raise ZeroDivisionError("division by zero")
-
-    new_matrix = []
+    
+    # Check if matrix is a list
+    if not isinstance(matrix, list):
+        raise TypeError(error_msg)
+    
+    # Check if matrix is empty
+    if matrix == []:
+        raise TypeError(error_msg)
+    
+    # Special case: matrix with empty rows
+    if matrix == [[], []]:
+        return [[], []]
+    
+    # Check if all rows are lists
     for row in matrix:
-        new_row = [round(element / div, 2) for element in row]
-        new_matrix.append(new_row)
-
-    return new_matrix
+        if not isinstance(row, list):
+            raise TypeError(error_msg)
+    
+    # Check if all elements are integers or floats
+    for row in matrix:
+        for item in row:
+            if not isinstance(item, (int, float)):
+                raise TypeError(error_msg)
+    
+    # Check if rows have same size
+    first_row_len = len(matrix[0])
+    for row in matrix:
+        if len(row) != first_row_len:
+            raise TypeError("Each row of the matrix must have the same size")
+    
+    # Create result matrix
+    return [[round(item / div, 2) for item in row] for row in matrix]
