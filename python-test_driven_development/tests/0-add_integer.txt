@@ -1,73 +1,73 @@
 # Test function add_integer
 >>> add_integer = __import__('0-add_integer').add_integer
 
-Basic addition with positive integers:
+# Basic addition with positive integers:
     >>> add_integer(1, 2)
     3
 
-Addition with a negative integer:
+# Addition with a negative integer:
     >>> add_integer(100, -2)
     98
 
-Using default value for b (98):
+# Using default value for b (98):
     >>> add_integer(2)
     100
 
-Converting floats to integers before addition:
+# Converting floats to integers before addition:
     >>> add_integer(100.3, -2)
     98
 
-Handling type errors - string as second argument:
+# Handling type errors - string as second argument:
     >>> add_integer(4, "School")
     Traceback (most recent call last):
     TypeError: b must be an integer
 
-Handling type errors - None as argument:
+# Handling type errors - None as argument:
     >>> add_integer(None)
     Traceback (most recent call last):
     TypeError: a must be an integer
 
-Addition with floating-point numbers:
+# Addition with floating-point numbers:
     >>> add_integer(2.5, 2.5)
     4
 
-Addition with large integers:
+# Addition with large integers:
     >>> add_integer(999999, 1)
     1000000
 
-Handling special floating point values - infinity:
+# Handling special floating point values - infinity:
     >>> add_integer(float('inf'), 0)
     Traceback (most recent call last):
     OverflowError: cannot convert float infinity to integer
 
-Addition with negative numbers:
+# Addition with negative numbers:
     >>> add_integer(-1, -1)
     -2
 
-Addition with zeros:
+# Addition with zeros:
     >>> add_integer(0, 0)
     0
 
-Floating-point numbers close to integers:
+# Floating-point numbers close to integers:
     >>> add_integer(1.9999999999, 1.9999999999)
     2
 
-Handling NaN:
+# Handling NaN:
     >>> add_integer(float('nan'))
     Traceback (most recent call last):
     ValueError: cannot convert float NaN to integer
 
-Addition with string as first argument:
+# Addition with string as first argument:
     >>> add_integer("Hello", 7)
     Traceback (most recent call last):
     TypeError: a must be an integer
 
-Addition with list as second argument:
+# Addition with list as second argument:
     >>> add_integer(7, [1, 2, 3])
     Traceback (most recent call last):
     TypeError: b must be an integer
 
-Function called without arguments:
+# Function called without arguments:
     >>> add_integer()
     Traceback (most recent call last):
     TypeError: add_integer() missing 1 required positional argument: 'a'
