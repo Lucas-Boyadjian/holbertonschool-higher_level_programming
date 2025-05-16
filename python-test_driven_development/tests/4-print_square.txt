@@ -35,12 +35,12 @@ TypeError: size must be an integer
 Traceback (most recent call last):
 TypeError: size must be an integer
 
-# Test with missing first_name argument
->>> say_my_name()
+# Test with None as size
+>>> print_square(None)
 Traceback (most recent call last):
-TypeError: say_my_name() missing 1 required positional argument: 'first_name'
+TypeError: size must be an integer
 
-# Test with None as first_name
->>> say_my_name(None)
+# Test with missing argument
+>>> print_square()
 Traceback (most recent call last):
-TypeError: first_name must be a string
+TypeError: print_square() missing 1 required positional argument: 'size'
