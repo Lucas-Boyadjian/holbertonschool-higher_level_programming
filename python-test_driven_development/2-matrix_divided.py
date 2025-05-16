@@ -29,7 +29,7 @@ def matrix_divided(matrix, div):
 
     for row in matrix:
         if not isinstance(row, list):
-            raise TypeError("matrix must be a matrix (list of lists)"
+            raise TypeError("matrix must be a matrix (list of lists) "
                             "of integers/floats")
 
         for element in row:

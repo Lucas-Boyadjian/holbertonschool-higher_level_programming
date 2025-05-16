@@ -33,3 +33,41 @@ TypeError: div must be a number
 >>> matrix_divided(matrix, 0)
 Traceback (most recent call last):
 ZeroDivisionError: division by zero
+
+# Test with empty matrix
+>>> matrix_divided([], 2)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+# Test with matrix containing non-numeric values
+>>> matrix_divided([[1, "string", 3], [4, 5, 6]], 2)
+Traceback (most recent call last):
+TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+# Test with negative divisor
+>>> matrix_divided(matrix, -2)
+[[-0.5, -1.0, -1.5], [-2.0, -2.5, -3.0]]
+
+# Test with floating point divisor
+>>> matrix_divided(matrix, 2.5)
+[[0.4, 0.8, 1.2], [1.6, 2.0, 2.4]]
+
+# Test with matrix containing floating point values
+>>> matrix_divided([[1.1, 2.2, 3.3], [4.4, 5.5, 6.6]], 2)
+[[0.55, 1.1, 1.65], [2.2, 2.75, 3.3]]
+
+# Test with one-row matrix
+>>> matrix_divided([[1, 2, 3]], 2)
+[[0.5, 1.0, 1.5]]
+
+# Test with one-column matrix
+>>> matrix_divided([[1], [2], [3]], 2)
+[[0.5], [1.0], [1.5]]
+
+# Test with matrix containing negative values
+>>> matrix_divided([[-1, -2, -3], [-4, -5, -6]], 2)
+[[-0.5, -1.0, -1.5], [-2.0, -2.5, -3.0]]
+
+# Test with very large values
+>>> matrix_divided([[1000000, 2000000], [3000000, 4000000]], 1000000)
+[[1.0, 2.0], [3.0, 4.0]]
