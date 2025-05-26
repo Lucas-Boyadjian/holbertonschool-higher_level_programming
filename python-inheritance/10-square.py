@@ -1,49 +1,37 @@
 #!/usr/bin/python3
-"""Module for Rectangle class that inherits from BaseGeometry"""
+"""Module for Square class that inherits from Rectangle"""
 
-BaseGeometry = __import__('7-base_geometry').BaseGeometry
+Rectangle = __import__('9-rectangle').Rectangle
 
 
-class Rectangle(BaseGeometry):
+class Square(Rectangle):
     """
-    Rectangle class that inherits from BaseGeometry
+    Square class that inherits from Rectangle
 
-    This class represents a rectangle with width and height dimensions
-    and provides methods to calculate area and string representation.
+    This class represents a square, which is a special kind of rectangle
+    where all sides have equal length.
     """
 
-    def __init__(self, width, height):
+    def __init__(self, size):
         """
-        Initialize a Rectangle with width and height
+        Initialize a Square with size
 
         Args:
-            width (int): The width of the rectangle, must be a positive integer
-            height (int): The height of the rectangle,
-            must be a positive integer
+            size (int): The size of the square, must be a positive integer
 
         Raises:
-            TypeError: If width or height is not an integer
-            ValueError: If width or height is less than or equal to 0
+            TypeError: If size is not an integer
+            ValueError: If size is less than or equal to 0
         """
-        super().integer_validator("width", width)
-        super().integer_validator("height", height)
-        self.__width = width
-        self.__height = height
+        self.integer_validator("size", size)
+        super().__init__(size, size)
+        self.__size = size
 
     def area(self):
         """
-        Calculate the area of the rectangle
+        Calculate the area of the square
 
         Returns:
-            int: The area (width * height)
+            int: The area (size * size)
         """
-        return self.__width * self.__height
-
-    def __str__(self):
-        """
-        Return string representation of the Rectangle
-
-        Returns:
-            str: A string in the format '[Rectangle] width/height'
-        """
-        return ("[Rectangle] {}/{}".format(self.__width, self.__height))
+        return self.__size * self.__size

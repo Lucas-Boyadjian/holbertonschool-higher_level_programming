@@ -25,8 +25,8 @@ class Rectangle(BaseGeometry):
             TypeError: If width or height is not an integer
             ValueError: If width or height is less than or equal to 0
         """
-        super().integer_validator("width", width)
-        super().integer_validator("height", height)
+        self.integer_validator("width", width)
+        self.integer_validator("height", height)
         self.__width = width
         self.__height = height
 
@@ -46,4 +46,4 @@ class Rectangle(BaseGeometry):
         Returns:
             str: A string in the format '[Rectangle] width/height'
         """
-        return ("[Rectangle] {}/{}".format(self.__width, self.__height))
+        return "[Rectangle] {}/{}".format(self.__width, self.__height)
