@@ -79,7 +79,7 @@ class Rectangle(Shape):
         """Calcule l'aire du rectangle.
 
         Returns:
-            float: L'aire du rectangle (largeur × hauteur)
+            float: L'aire du rectangle (largeur * hauteur)
         """
         return self.width * self.height
 
@@ -87,7 +87,7 @@ class Rectangle(Shape):
         """Calcule le périmètre du rectangle.
 
         Returns:
-            float: Le périmètre du rectangle (2 × (largeur + hauteur))
+            float: Le périmètre du rectangle (2 * (largeur + hauteur))
         """
         return 2 * (self.width + self.height)
 
