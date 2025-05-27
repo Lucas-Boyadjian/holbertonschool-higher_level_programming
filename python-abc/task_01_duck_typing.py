@@ -49,7 +49,7 @@ class Circle(Shape):
         """Calcule l'aire du cercle.
 
         Returns:
-            float: L'aire du cercle (π × r²)
+            float: L'aire du cercle (π * r²)
         """
         return math.pi * self.radius ** 2
 
@@ -57,7 +57,7 @@ class Circle(Shape):
         """Calcule le périmètre (circonférence) du cercle.
 
         Returns:
-            float: Le périmètre du cercle (2 × π × r)
+            float: Le périmètre du cercle (2 * π * r)
         """
         return 2 * math.pi * self.radius
 
