@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Module illustrant l'utilisation des classes abstraites
-et le duck typing en Python.
+Module illustrating the use of abstract classes
+and duck typing in Python.
 """
 
 from abc import ABC, abstractmethod
@@ -9,99 +9,99 @@ import math
 
 
 class Shape(ABC):
-    """Classe abstraite définissant l'interface pour les formes géométriques.
+    """Abstract class defining the interface for geometric shapes.
 
-    Cette classe ne peut pas être instanciée directement et force
-    ses sous-classes à implémenter des méthodes spécifiques.
+    This class cannot be instantiated directly and forces
+    its subclasses to implement specific methods.
     """
 
     @abstractmethod
     def area(self):
-        """Méthode abstraite pour calculer l'aire de la forme.
+        """Abstract method to calculate the area of the shape.
 
         Returns:
-            float: L'aire de la forme
+            float: The area of the shape
         """
         pass
 
     @abstractmethod
     def perimeter(self):
-        """Méthode abstraite pour calculer le périmètre de la forme.
+        """Abstract method to calculate the perimeter of the shape.
 
         Returns:
-            float: Le périmètre de la forme
+            float: The perimeter of the shape
         """
         pass
 
 
 class Circle(Shape):
-    """Classe représentant un cercle."""
+    """Class representing a circle."""
 
     def __init__(self, radius):
-        """Initialise un cercle avec un rayon donné.
+        """Initialize a circle with a given radius.
 
         Args:
-            radius (float): Le rayon du cercle
+            radius (float): The radius of the circle
         """
         self.radius = radius
 
     def area(self):
-        """Calcule l'aire du cercle.
+        """Calculate the area of the circle.
 
         Returns:
-            float: L'aire du cercle (π * r²)
+            float: The area of the circle (pi * r²)
         """
         return math.pi * self.radius ** 2
 
     def perimeter(self):
-        """Calcule le périmètre (circonférence) du cercle.
+        """Calculate the perimeter (circumference) of the circle.
 
         Returns:
-            float: Le périmètre du cercle (2 * π * r)
+            float: The perimeter of the circle (2 * pi * r)
         """
         return 2 * math.pi * self.radius
 
 
 class Rectangle(Shape):
-    """Classe représentant un rectangle."""
+    """Class representing a rectangle."""
 
     def __init__(self, width, height):
-        """Initialise un rectangle avec une largeur et une hauteur données.
+        """Initialize a rectangle with a given width and height.
 
         Args:
-            width (float): La largeur du rectangle
-            height (float): La hauteur du rectangle
+            width (float): The width of the rectangle
+            height (float): The height of the rectangle
         """
         self.width = width
         self.height = height
 
     def area(self):
-        """Calcule l'aire du rectangle.
+        """Calculate the area of the rectangle.
 
         Returns:
-            float: L'aire du rectangle (largeur * hauteur)
+            float: The area of the rectangle (width * height)
         """
         return self.width * self.height
 
     def perimeter(self):
-        """Calcule le périmètre du rectangle.
+        """Calculate the perimeter of the rectangle.
 
         Returns:
-            float: Le périmètre du rectangle (2 * (largeur + hauteur))
+            float: The perimeter of the rectangle (2 * (width + height))
         """
         return 2 * (self.width + self.height)
 
 
-def shape_info(shape):
-    """Affiche l'aire et le périmètre d'une forme géométrique.
+def shape_info(Shape):
+    """Display the area and perimeter of a geometric shape.
 
-    Cette fonction utilise le principe du duck typing: elle fonctionne avec
-    tout objet qui possède les méthodes area() et perimeter(), sans vérifier
-    son type explicitement.
+    This function uses the principle of duck typing: it works with
+    any object that has area() and perimeter() methods, without explicitly
+    checking its type.
 
     Args:
-        shape (Shape): Un objet qui implémente les méthodes
-        area() et perimeter()
+        shape (Shape): An object that implements the area() and
+        perimeter() methods
     """
-    print("Area: {}".format(shape.area()))
-    print("Perimeter: {}".format(shape.perimeter()))
+    print("Area: {}".format(Shape.area()))
+    print("Perimeter: {}".format(Shape.perimeter()))
