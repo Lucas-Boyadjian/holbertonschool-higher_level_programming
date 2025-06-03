@@ -54,5 +54,5 @@ class CustomObject:
         try:
             with open(filename, "rb") as my_file:
                 return pickle.load(my_file)
-        except (pickle.UnpicklingError):
+        except Exception:
             return None
