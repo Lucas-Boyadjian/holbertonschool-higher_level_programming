@@ -1,0 +1,125 @@
+# Cours : Utilisation de cURL pour les Requêtes API
+
+## 1. Introduction à cURL
+
+cURL (Client URL) est un outil en ligne de commande permettant de transférer des données via divers protocoles, 
+notamment HTTP. Il est particulièrement utile pour interagir avec des API REST.
+
+## 2. Installation de cURL
+
+### Sur les systèmes Debian/Ubuntu:
+```bash
+sudo apt install curl
+```
+
+### Vérification de l'installation:
+```bash
+curl --version
+```
+
+## 3. Requêtes API basiques avec cURL
+
+### Requête GET simple:
+```bash
+curl https://api.exemple.com/ressources
+```
+
+### Afficher uniquement les en-têtes (headers):
+```bash
+curl -I https://api.exemple.com/ressources
+```
+
+### Enregistrer la réponse dans un fichier:
+```bash
+curl -o resultat.json https://api.exemple.com/ressources
+```
+
+## 4. Manipulation des en-têtes HTTP
+
+### Ajouter un en-tête d'authentification:
+```bash
+curl -H "Authorization: Bearer votre_token" https://api.exemple.com/ressources
+```
+
+### Définir le type de contenu:
+```bash
+curl -H "Content-Type: application/json" https://api.exemple.com/ressources
+```
+
+## 5. Méthodes HTTP avec cURL
+
+### Requête POST (envoi de données):
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"nom":"Jean", "age":30}' https://api.exemple.com/utilisateurs
+```
+
+### Requête PUT (mise à jour):
+```bash
+curl -X PUT -H "Content-Type: application/json" -d '{"nom":"Jean", "age":31}' https://api.exemple.com/utilisateurs/123
+```
+
+### Requête DELETE (suppression):
+```bash
+curl -X DELETE https://api.exemple.com/utilisateurs/123
+```
+
+## 6. Options utiles pour l'analyse des résultats
+
+### Afficher les détails de la requête:
+```bash
+curl -v https://api.exemple.com/ressources
+```
+
+### Formater la sortie JSON pour la lisibilité:
+```bash
+curl https://api.exemple.com/ressources | json_pp
+```
+ou
+```bash
+curl https://api.exemple.com/ressources | python -m json.tool
+```
+
+## 7. Exercice pratique avec JSONPlaceholder
+
+[JSONPlaceholder](https://jsonplaceholder.typicode.com/) est une API REST factice idéale pour l'apprentissage.
+
+### Récupérer des posts:
+```bash
+curl https://jsonplaceholder.typicode.com/posts
+```
+
+### Récupérer un post spécifique:
+```bash
+curl https://jsonplaceholder.typicode.com/posts/1
+```
+
+### Créer un nouveau post:
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"title":"Mon Titre","body":"Contenu du post","userId":1}' https://jsonplaceholder.typicode.com/posts
+```
+
+## 8. Interprétation des résultats
+
+### Codes de statut HTTP communs:
+- **200 OK**: Requête réussie
+- **201 Created**: Ressource créée avec succès
+- **400 Bad Request**: Erreur dans la requête
+- **401 Unauthorized**: Authentification nécessaire
+- **404 Not Found**: Ressource non trouvée
+- **500 Internal Server Error**: Erreur serveur
+
+### Analyse des réponses JSON:
+Les API renvoient généralement des données au format JSON que vous pouvez analyser pour:
+- Vérifier si une opération a réussi
+- Extraire des informations spécifiques
+- Identifier les erreurs potentielles
+
+## 9. Conclusion
+
+La maîtrise de cURL est essentielle pour tout développeur travaillant avec des API. Cet outil permet de:
+- Tester rapidement des endpoints API
+- Déboguer des problèmes d'intégration
+- Automatiser des interactions avec des services web
+- Comprendre le fonctionnement des protocoles HTTP
+
+Avec ces compétences, vous serez capable de construire et d'exécuter efficacement des requêtes API, d'interpréter leurs résultats et d'identifier les problèmes potentiels lors de l'intégration d'API dans vos applications.

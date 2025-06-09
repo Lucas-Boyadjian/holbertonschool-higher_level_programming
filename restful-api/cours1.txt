@@ -1,0 +1,181 @@
+1. Différences entre HTTP et HTTPS :
+
+La seule différence entre les deux protocoles est que HTTPS utilise TLS (SSL) pour chiffrer les demandes et les réponses HTTP normales, 
+et pour signer numériquement ces demandes et ces réponses. Par conséquent, le protocole HTTPS est beaucoup plus sûr que le protocole HTTP. 
+Un site web qui utilise le protocole HTTP a http:// dans son URL, tandis qu'un site web qui utilise le protocole HTTPS a https://.
+
+HTTP (Hypertext Transfer Protocol) = Protocole pour transférer des données sur un réseau. La plupart des informations envoyées sur 
+Internet, y compris le contenu du site Web et les appels d'API, utilisent le protocole HTTP. Il existe deux principaux types 
+de messages HTTP : les requêtes et les réponses.
+
+HTTPS (Hypertext Transfer Protocol Secure) = C'est HTTP avec chiffrement et vérification. 
+
+
+
+2. Description ou représentation de la structure d'une requête et d'une réponse HTTP :
+
+# Structure d'une Requête et d'une Réponse HTTP
+
+## Structure d'une Requête HTTP
+
+Une requête HTTP se compose de :
+
+1. **Ligne de Requête**
+   - Méthode HTTP (GET, POST, PUT, DELETE, etc.)
+   - URI de la requête (chemin vers la ressource)
+   - Version HTTP (par exemple, HTTP/1.1)
+
+2. **En-têtes**
+   - Paires clé-valeur fournissant des métadonnées sur la requête
+   - En-têtes courants : Host, User-Agent, Accept, Content-Type, Authorization
+
+3. **Ligne Vide**
+   - Indique la fin des en-têtes
+
+4. **Corps du Message** (facultatif)
+   - Contient les données envoyées au serveur (par exemple, données de formulaire, charge utile JSON)
+   - Présent dans les requêtes POST, PUT ; généralement absent dans les requêtes GET
+
+Exemple :
+```
+GET /api/utilisateurs HTTP/1.1
+Host: exemple.com
+User-Agent: Mozilla/5.0
+Accept: application/json
+
+```
+
+## Structure d'une Réponse HTTP
+
+Une réponse HTTP se compose de :
+
+1. **Ligne de Statut**
+   - Version HTTP
+   - Code de statut (par exemple, 200, 404, 500)
+   - Texte du statut (OK, Not Found, etc.)
+
+2. **En-têtes**
+   - Paires clé-valeur avec métadonnées sur la réponse
+   - En-têtes courants : Content-Type, Content-Length, Server, Date
+
+3. **Ligne Vide**
+   - Indique la fin des en-têtes
+
+4. **Corps du Message** (facultatif)
+   - Contient la ressource demandée ou des informations d'erreur
+   - Format spécifié par l'en-tête Content-Type (par exemple, HTML, JSON, XML)
+
+Exemple :
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 234
+Date: Lun, 09 Juin 2025 12:28:53 GMT
+
+{
+  "id": 123,
+  "nom": "Jean Dupont",
+  "email": "jean@exemple.com"
+}
+```
+
+3. Liste de méthodes HTTP courantes et de code d'état avec leurs descriptions/cas =
+# Méthodes HTTP et Codes de Statut Courants
+
+## Méthodes HTTP
+
+1. **GET**
+   - **Description** : Récupère des données
+   - **Cas d'utilisation** : Charger une page web, récupérer des données depuis une API
+
+2. **POST**
+   - **Description** : Envoie des données à traiter au serveur
+   - **Cas d'utilisation** : Soumettre un formulaire, créer une nouvelle ressource
+
+3. **PUT**
+   - **Description** : Met à jour une ressource existante dans son intégralité
+   - **Cas d'utilisation** : Remplacer complètement un profil utilisateur
+
+4. **PATCH**
+   - **Description** : Met à jour partiellement une ressource existante
+   - **Cas d'utilisation** : Modifier un seul champ d'un profil utilisateur
+
+5. **DELETE**
+   - **Description** : Supprime une ressource spécifiée
+   - **Cas d'utilisation** : Supprimer un article ou un compte utilisateur
+
+6. **HEAD**
+   - **Description** : Identique à GET mais ne retourne que les en-têtes sans le corps
+   - **Cas d'utilisation** : Vérifier si une ressource existe sans la télécharger
+
+7. **OPTIONS**
+   - **Description** : Renvoie les méthodes HTTP supportées pour une ressource
+   - **Cas d'utilisation** : Vérifier quelles opérations sont autorisées sur une API
+
+## Codes de Statut HTTP
+
+### 1xx - Information
+
+- **100 Continue**
+  - **Description** : Le serveur a reçu les en-têtes de la requête et le client peut poursuivre
+  - **Scénario** : Lors du téléchargement d'un fichier volumineux
+
+### 2xx - Succès
+
+- **200 OK**
+  - **Description** : La requête a réussi
+  - **Scénario** : Page web chargée avec succès
+
+- **201 Created**
+  - **Description** : La requête a réussi et une nouvelle ressource a été créée
+  - **Scénario** : Après avoir ajouté un nouvel utilisateur à la base de données
+
+- **204 No Content**
+  - **Description** : La requête a réussi mais il n'y a pas de contenu à renvoyer
+  - **Scénario** : Après une suppression réussie d'une ressource
+
+### 3xx - Redirection
+
+- **301 Moved Permanently**
+  - **Description** : La ressource a été déplacée définitivement
+  - **Scénario** : Redirection d'une ancienne URL vers une nouvelle
+
+- **302 Found (Temporary Redirect)**
+  - **Description** : La ressource est temporairement à une autre URL
+  - **Scénario** : Redirection après une connexion réussie
+
+### 4xx - Erreur Client
+
+- **400 Bad Request**
+  - **Description** : La requête contient une erreur de syntaxe
+  - **Scénario** : Formulaire soumis avec des données invalides
+
+- **401 Unauthorized**
+  - **Description** : Authentification nécessaire
+  - **Scénario** : Tentative d'accès à une page réservée sans être connecté
+
+- **403 Forbidden**
+  - **Description** : Le serveur comprend la requête mais refuse de l'exécuter
+  - **Scénario** : Tentative d'accès à une zone réservée aux administrateurs
+
+- **404 Not Found**
+  - **Description** : Ressource non trouvée
+  - **Scénario** : URL inexistante ou ressource supprimée
+
+- **429 Too Many Requests**
+  - **Description** : Trop de requêtes dans un temps donné
+  - **Scénario** : Dépassement de la limite d'une API
+
+### 5xx - Erreur Serveur
+
+- **500 Internal Server Error**
+  - **Description** : Erreur interne du serveur
+  - **Scénario** : Bug dans le code du serveur
+
+- **502 Bad Gateway**
+  - **Description** : Le serveur a reçu une réponse invalide d'un serveur en amont
+  - **Scénario** : Problème avec un service externe utilisé par le site
+
+- **503 Service Unavailable**
+  - **Description** : Le serveur n'est pas disponible temporairement
+  - **Scénario** : Maintenance du site ou surcharge du serveur
