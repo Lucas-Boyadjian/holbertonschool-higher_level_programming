@@ -33,39 +33,39 @@ class Serveur(http.server.BaseHTTPRequestHandler):
 
         if self.path == '/':
             self.send_response(200)
-            self.send_header('Content-Type', 'text/plain')
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
             self.wfile.write(b'Hello, this is a simple API!')
 
         elif self.path == '/data':
-            dict_data = {"name": "John", "age": 30, "city": "New York"}
-            data = json.dumps(dict_data)
             self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
+            self.send_header('Content-type', 'application/json')
             self.end_headers()
-            self.wfile.write(data.encode())
+            dict_data = json.dumps({"name": "John", "age": 30,
+                                   "city": "New York"})
+            self.wfile.write(dict_data.encode())
 
         elif self.path == '/status':
             self.send_response(200)
-            self.send_header('Content-Type', 'text/plain')
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(b'OK')
+            self.wfile.write(b"OK")
 
         elif self.path == '/info':
-            info_data = {"version": "1.0", "description":
-                         "A simple API built with http.server"}
-            info_response = json.dumps(info_data)
             self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
+            self.send_header('Content-type', 'application/json')
             self.end_headers()
-            self.wfile.write(info_response.encode())
+            json_info = json.dumps({
+                "version": "1.0",
+                "description": "A simple API built with http.server"
+            })
+            self.wfile.write(json_info.encode())
 
         else:
             self.send_response(404)
-            self.send_header('Content-Type', 'application/json')
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            error_mesg = json.dumps({"error": "Endpoint not found"})
-            self.wfile.write(error_mesg.encode())
+            self.wfile.write(b"Endpoint not found")
 
 
 if __name__ == "__main__":
