@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-users = {}
+users = {"jane": {"name": "Jane", "age": 28, "city": "Los Angeles"}}
 
 @app.route('/')
 def home():
@@ -17,13 +17,36 @@ def data():
     list_names = []
     for user in users.values():
         list_names.append(user["name"])
-    
-    return jsonify(list_names) 
+
+    return jsonify(list_names)
 
 @app.route("/status")
 def status():
     """Return status of the API"""
     return jsonify({"status": "OK"})
 
+@app.route("/users/<username>")
+def user_name(username):
+    """Return the full user object for the specified username"""
+    if username in users:
+        return jsonify(users[username])
+
+@app.route("/add_user", methods=["POST"])
+def user_add():
+    """Add a new user to the users dictionary
+
+    Expects JSON data with username, name, age, and city
+    Example: {"username": "john", "name": "John", "age": 30, "city": "New York"}
+    """
+    data = request.get_json()
+    username = data.get('username')
+
+    new_user = {"name": data.get('name', ''), "age": data.get('age', 0),
+                "city": data.get('city', '')}
+
+    users[username] = new_user
+
+    return jsonify({"message": f"User {username} added successfully",
+                    "user": new_user})
 
 if __name__ == "__main__": app.run()
