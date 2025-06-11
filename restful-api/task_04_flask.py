@@ -35,9 +35,7 @@ def status():
 def user_name(username):
     """Return the full user object for the specified username"""
     if username in users:
-        user_data = users[username].copy()
-        user_data["username"] = username
-        return jsonify(user_data)
+        return jsonify(users[username])
     else:
         return jsonify({"error": "User not found"}), 404
 
@@ -54,8 +52,8 @@ def user_add():
     if not username:
         return jsonify({"error": "Username is required"}), 400
 
-    new_user = {"name": data.get('name', ''), "age": data.get('age', 0),
-                "city": data.get('city', '')}
+    new_user = {"username": username, "name": data.get('name', ''),
+                "age": data.get('age', 0), "city": data.get('city', '')}
 
     users[username] = new_user
 
