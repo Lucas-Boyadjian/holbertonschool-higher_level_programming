@@ -8,7 +8,6 @@ of creating a RESTful API using Python's built-in http.server module.
 """
 
 import http.server
-from http.server import HTTPServer
 import json
 
 
@@ -43,7 +42,6 @@ class Serveur(http.server.BaseHTTPRequestHandler):
             data = json.dumps(dict_data)
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
-            self.send_header('Content-Length', str(len(data)))
             self.end_headers()
             self.wfile.write(data.encode())
 
