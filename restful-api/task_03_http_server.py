@@ -12,7 +12,7 @@ from http.server import HTTPServer
 import json
 
 
-class serveur(http.server.BaseHTTPRequestHandler):
+class Serveur(http.server.BaseHTTPRequestHandler):
     """
     HTTP request handler class that implements a simple REST API.
 
@@ -31,6 +31,7 @@ class serveur(http.server.BaseHTTPRequestHandler):
             - /info: Returns API version and description
             - Any other path: Returns a 404 error
         """
+
         if self.path == '/':
             self.send_response(200)
             self.send_header('Content-Type', 'text/plain')
@@ -65,10 +66,11 @@ class serveur(http.server.BaseHTTPRequestHandler):
             self.send_response(404)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
-            error_mesg = json.dumps({"Endpoint not found"})
+            error_mesg = json.dumps({"error": "Endpoint not found"})
             self.wfile.write(error_mesg.encode())
 
 
-server_address = ('', 8000)
-httpd = HTTPServer(server_address, serveur)
-httpd.serve_forever()
+if __name__ == "__main__":
+    server_address = ('', 8000)
+    httpd = HTTPServer(server_address, Serveur)
+    httpd.serve_forever()
