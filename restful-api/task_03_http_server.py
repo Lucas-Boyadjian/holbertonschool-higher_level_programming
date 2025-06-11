@@ -47,11 +47,10 @@ class Serveur(http.server.BaseHTTPRequestHandler):
             self.wfile.write(data.encode())
 
         elif self.path == '/status':
-            status_response = json.dumps({'status': 'OK'})
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
-            self.wfile.write(status_response.encode())
+            self.wfile.write(b'OK')
 
         elif self.path == '/info':
             info_data = {"version": "1.0", "description":
