@@ -40,6 +40,8 @@ def user_name(username):
     """Return the full user object for the specified username"""
     if username in users:
         return jsonify(users[username])
+    else:
+        return jsonify({"error": "User not found"})
 
 
 @app.route("/add_user", methods=["POST"])
@@ -49,15 +51,17 @@ def user_add():
     Expects JSON data with username, name, age, and city
     """
     data = request.get_json()
+
     username = data.get('username')
+    if not username:
+        return jsonify({"error": "Username is required"}), 400
 
     new_user = {"name": data.get('name', ''), "age": data.get('age', 0),
                 "city": data.get('city', '')}
 
     users[username] = new_user
 
-    return jsonify({"message": f"User {username} added successfully",
-                    "user": new_user})
+    return jsonify({"message": "User added", "user": new_user}), 201
 
 
 if __name__ == "__main__":
