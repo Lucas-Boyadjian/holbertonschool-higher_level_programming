@@ -22,11 +22,7 @@ def home():
 @app.route("/data")
 def data():
     """Return a list of all usernames in the API"""
-    list_names = []
-    for user in users.values():
-        list_names.append(user["name"])
-
-    return jsonify(list_names)
+    return jsonify(list(users.keys()))
 
 
 @app.route("/status")
@@ -39,9 +35,11 @@ def status():
 def user_name(username):
     """Return the full user object for the specified username"""
     if username in users:
-        return jsonify(users[username])
+        user_data = users[username].copy()
+        user_data["username"] = username
+        return jsonify(user_data)
     else:
-        return jsonify({"error": "User not found"})
+        return jsonify({"error": "User not found"}), 404
 
 
 @app.route("/add_user", methods=["POST"])
