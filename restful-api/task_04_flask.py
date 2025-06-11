@@ -10,7 +10,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-users = {"jane": {"name": "Jane", "age": 28, "city": "Los Angeles"}}
+users = {}
 
 
 @app.route('/')
@@ -28,7 +28,7 @@ def data():
 @app.route("/status")
 def status():
     """Return status of the API"""
-    return jsonify({"status": "OK"})
+    return 'OK'
 
 
 @app.route("/users/<username>")
