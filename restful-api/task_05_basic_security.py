@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """
-API Flask avec authentification basique et JWT.
+Flask API with basic and JWT authentication.
 
-Ce module implémente plusieurs méthodes d'authentification:
-- Authentification basique (nom d'utilisateur/mot de passe)
-- Authentification par jeton JWT
-- Contrôle d'accès basé sur les rôles
+This module implements several authentication methods:
+- Basic authentication (username/password)
+- JWT token authentication
+- Role-based access control
 """
 
 from flask import Flask, jsonify, request
@@ -37,8 +37,7 @@ tokens = {
 
 @auth.verify_password
 def verify_password(username, password):
-    """Vérifie que le nom d'utilisateur existe et que
-    le mot de passe est correct"""
+    """Verifies that the username exists and password is correct"""
     if username in users and check_password_hash(users[username]['password'],
                                                  password):
         return username
@@ -47,7 +46,7 @@ def verify_password(username, password):
 @app.route('/basic-protected', methods=["GET"])
 @auth.login_required
 def verify_user():
-    """Route protégée par authentification basique HTTP"""
+    """Route protected by HTTP Basic Authentication"""
     current_user = auth.current_user()
     if current_user not in users:
         return jsonify({"error": "Unauthorized"}), 401
@@ -57,44 +56,37 @@ def verify_user():
 
 @jwt.unauthorized_loader
 def handle_unauthorized_error(err):
-    """Gestionnaire pour les requêtes sans jeton JWT"""
+    """Handler for requests without a JWT token"""
     return jsonify({"error": "Missing or invalid token"}), 401
 
 
 @jwt.invalid_token_loader
 def handle_invalid_token_error(err):
-    """Gestionnaire pour les jetons JWT mal formés"""
+    """Handler for malformed JWT tokens"""
     return jsonify({"error": "Invalid token"}), 401
 
 
 @jwt.expired_token_loader
 def handle_expired_token_error(header, payload):
-    """Gestionnaire pour les jetons JWT expirés"""
+    """Handler for expired JWT tokens"""
     return jsonify({"error": "Token has expired"}), 401
 
 
 @jwt.revoked_token_loader
 def handle_revoked_token_error(header, payload):
-    """Gestionnaire pour les jetons JWT révoqués"""
+    """Handler for revoked JWT tokens"""
     return jsonify({"error": "Token has been revoked"}), 401
 
 
 @jwt.needs_fresh_token_loader
 def handle_needs_fresh_token_error(err):
-    """Gestionnaire pour les cas où un jeton JWT frais est requis"""
+    """Handler for cases where a fresh JWT token is required"""
     return jsonify({"error": "Fresh token required"}), 401
-
-
-@auth.verify_token
-def verify_token(token):
-    """Vérifie si le jeton est valide dans notre dictionnaire de jetons"""
-    if token in tokens:
-        return tokens[token]
 
 
 @app.route("/login", methods=["POST"])
 def login():
-    """Authentifie l'utilisateur et génère un jeton JWT"""
+    """Authenticates the user and generates a JWT token"""
     data = request.get_json()
     if not data:
         return jsonify({"error": "Missing JSON data"}), 400
@@ -118,14 +110,14 @@ def login():
 @app.route("/jwt-protected", methods=["GET"])
 @jwt_required()
 def jwt_protection():
-    """Route protégée par authentification JWT"""
+    """Route protected by JWT authentication"""
     return "JWT Auth: Access Granted"
 
 
 @app.route("/admin-only", methods=["GET"])
 @jwt_required()
 def access_admin():
-    """Route accessible uniquement aux utilisateurs avec le rôle admin"""
+    """Route accessible only to users with admin role"""
     current_user = get_jwt_identity()
     if users[current_user]["role"] != "admin":
         return jsonify({"error": "Admin access required"}), 403
