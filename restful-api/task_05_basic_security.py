@@ -67,13 +67,13 @@ def handle_invalid_token_error(err):
 
 
 @jwt.expired_token_loader
-def handle_expired_token_error(header, payload):
+def handle_expired_token_error(err):
     """Handler for expired JWT tokens"""
     return jsonify({"error": "Token has expired"}), 401
 
 
 @jwt.revoked_token_loader
-def handle_revoked_token_error(header, payload):
+def handle_revoked_token_error(err):
     """Handler for revoked JWT tokens"""
     return jsonify({"error": "Token has been revoked"}), 401
 
