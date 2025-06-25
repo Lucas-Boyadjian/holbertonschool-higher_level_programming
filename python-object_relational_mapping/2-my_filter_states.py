@@ -1,5 +1,10 @@
 #!/usr/bin/python3
-
+"""
+Script that takes in an argument and displays
+all values in the states table where name matches the argument.
+Takes 4 arguments: mysql username, mysql password,
+database name and state name searched.
+"""
 import MySQLdb
 from sys import argv
 
@@ -15,7 +20,8 @@ if __name__ == "__main__":
 
     cur = db.cursor()
 
-    cur.execute("SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(argv[4]))
+    cur.execute("SELECT * FROM states WHERE name = '{}' ORDER BY id ASC"
+                .format(argv[4]))
 
     rows = cur.fetchall()
 
@@ -24,4 +30,3 @@ if __name__ == "__main__":
 
     cur.close()
     db.close()
-    
