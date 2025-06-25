@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Script that lists all states with a name starting with N (upper N) from the database hbtn_0e_0_usa
+Script that lists all states with a name starting with N (upper N)
+from the database hbtn_0e_0_usa
 Takes 3 arguments: mysql username, mysql password and database name
 """
 import MySQLdb
@@ -26,4 +27,3 @@ if __name__ == "__main__":
 
     cur.close()
     db.close()
-    
