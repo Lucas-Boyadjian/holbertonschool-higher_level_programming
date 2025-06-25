@@ -24,4 +24,4 @@ if __name__ == "__main__":
     ).join(City).order_by(City.id).all()
 
     for state_name, city_id, city_name in results:
-        print('{}: ({}) {}'.format(State.name, City.id, City.name))
+        print("{}: ({}) {}".format(state_name, city_id, city_name))
