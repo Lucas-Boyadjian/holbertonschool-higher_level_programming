@@ -3,6 +3,8 @@
 Generate personalized invitation files from a template and a list of attendees.
 """
 
+import os
+
 
 def generate_invitations(template, attendees):
     """
@@ -54,5 +56,11 @@ def generate_invitations(template, attendees):
         )
 
         new_file = "output_{}.txt".format(index)
-        with open(new_file, 'w') as file:
-            file.write(invitation)
+        try:
+            if os.path.exists(new_file):
+                print("File {} already exists. Skipping.".format(new_file))
+                continue
+            with open(new_file, 'w') as file:
+                file.write(invitation)
+        except Exception as e:
+            print("Error writing to {}: {}".format(new_file, e))
