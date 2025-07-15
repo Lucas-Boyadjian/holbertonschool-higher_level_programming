@@ -25,14 +25,17 @@ def generate_invitations(template, attendees):
         - Output files are named output_X.txt (X starts at 1).
     """
     if not isinstance(template, str):
-        raise TypeError("template must be a string")
+        print("template must be a string")
+        return
 
     if not isinstance(attendees, list):
-        raise TypeError("attendees must be a list of dictionaries")
-
+        print("attendees must be a list of dictionaries")
+        return
+    
     for x in attendees:
         if not isinstance(x, dict):
-            raise TypeError("attendees must be a list of dictionaries")
+            print("attendees must be a list of dictionaries")
+            return
 
     if not template:
         print("Template is empty, no output files generated.")
