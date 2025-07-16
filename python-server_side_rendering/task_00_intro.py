@@ -31,7 +31,7 @@ def generate_invitations(template, attendees):
     if not isinstance(attendees, list):
         print("attendees must be a list of dictionaries")
         return
-    
+
     for x in attendees:
         if not isinstance(x, dict):
             print("attendees must be a list of dictionaries")
