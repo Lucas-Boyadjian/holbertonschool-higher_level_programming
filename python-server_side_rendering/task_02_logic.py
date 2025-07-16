@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """
+Flask application to render static and dynamic pages, including reading items from a JSON file
+and displaying them using Jinja templates.
 """
 
 from flask import Flask, json, render_template
