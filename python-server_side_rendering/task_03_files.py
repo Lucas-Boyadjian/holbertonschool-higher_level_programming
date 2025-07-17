@@ -64,7 +64,7 @@ def products():
         if not products:
             return render_template('product_display.html',
                                    error="Product not found")
-        return render_template('product_display.html', products=products)
+    return render_template('product_display.html', products=products)
 
 
 if __name__ == '__main__':
