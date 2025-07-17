@@ -1,5 +1,5 @@
 <table>
-  <caption>Légende du tableau</caption>
+  <caption>Array of products</caption>
   <thead>
     <tr>
       <th scope="col">Name</th>
@@ -8,15 +8,22 @@
     </tr>
   </thead>
   <tbody>
+    {% if error %}
     <tr>
-      <th scope="row">Laptop</th>
-      <td>Electrocic</td>
-      <td>799.99</td>
+      <td>{{ error }}</td>
     </tr>
+    {% elif products %}
+    {% for product in products %}
     <tr>
-      <th scope="row">Coffee Mug</th>
-      <td>Home Goods</td>
-      <td>15.99</td>
+      <td>{{ product['name'] }}</td>
+      <td>{{ product['category'] }}</td>
+      <td>{{ product['price'] }}</td>
     </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+      <td>No products found</td>
+    </tr>
+    {% endif %}
   </tbody>
 </table>

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-Flask application to render static and dynamic pages, including reading items from a JSON file
-and displaying them using Jinja templates.
+Flask application to render static and dynamic pages, including reading
+items from a JSON file and displaying them using Jinja templates.
 """
 
 from flask import Flask, json, render_template, request
@@ -44,7 +44,7 @@ def products():
     if source == 'json':
         with open('products.json') as file:
             products = json.load(file)
-    
+
     elif source == 'csv':
         with open('products.csv') as file:
             reader = csv.DictReader(file)
@@ -53,11 +53,19 @@ def products():
                 products.append(row)
 
     else:
-        render_template('product_display.html', error="Wrong source")
-    
+        return render_template('product_display.html', error="Wrong source")
+
     if id:
-        products_id = filter(products, id)
-    
+        products_id = []
+        for index in products:
+            if str(index.get('id')) == str(id):
+                products_id.append(index)
+        products = products_id
+        if not products:
+            return render_template('product_display.html',
+                                   error="Product not found")
+        return render_template('product_display.html', products=products)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
