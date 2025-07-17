@@ -1,8 +1,10 @@
-from flask import Flask, render_template
+#!/usr/bin/python3
 """
-Flask application with dynamic item listing using Jinja templates.
+Flask application to render static pages (home, about, contact) 
+using Jinja templates. Each route returns its corresponding HTML template.
 """
 
+from flask import Flask, render_template
 
 app = Flask(__name__)
 

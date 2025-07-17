@@ -1,31 +1,12 @@
 #!/usr/bin/python3
 """
-Flask application to render static and dynamic pages, including reading items from a JSON file
-and displaying them using Jinja templates.
+Flask application to render static and dynamic pages.
+Reads items from a JSON file and displays them using Jinja templates.
 """
 
 from flask import Flask, json, render_template
 
 app = Flask(__name__)
-
-
-@app.route('/')
-def home():
-    """Render the home page."""
-    return render_template('index.html')
-
-
-@app.route('/about')
-def about():
-    """Render the about page."""
-    return render_template('about.html')
-
-
-@app.route('/contact')
-def contact():
-    """Render the contact page."""
-    return render_template('contact.html')
-
 
 @app.route('/items')
 def items():
